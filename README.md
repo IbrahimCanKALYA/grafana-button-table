@@ -1,115 +1,91 @@
-# Grafana panel plugin template
+# Button Table
 
-This template is a starting point for building a panel plugin for Grafana.
+  
 
-## What are Grafana panel plugins?
+The Grafana Table Extended Plugin is an extension of the base Grafana table plugin with added features for enhanced functionality.
 
-Panel plugins allow you to add new types of visualizations to your dashboard, such as maps, clocks, pie charts, lists, and more.
+  
 
-Use panel plugins when you want to do things like visualize data returned by data source queries, navigate between dashboards, or control external systems (such as smart home devices).
+- **Add Button to Table:** Easily incorporate interactive buttons within your tables for seamless user interaction.
+![alt text](image.png)
+- **Value Inspect for Images:** Enable image inspection within the table for better visualization and analysis.
 
-## Getting started
+![alt text](image-2.png)
+
+## Manual Installation Guide
+
+ #### Download the Plugin
+	 Download the latest release of the Button Table Plugin from this [URL](https://).
+ #### Place the Plugin in the Grafana Plugins Folder
+
+ 1. Extract the downloaded plugin zip file.
+ 2. Locate your Grafana installation directory.
+	  - If you installed Grafana manually: Find the directory where Grafana is installed.
+	  - If you are using Docker: Locate the Grafana Docker container.
+ 3. Copy the extracted plugin folder into the Grafana plugins directory. 
+	  - For manual installations: Place the plugin folder in `<grafana_installation_directory>/data/plugins`.
+	  - For Docker: Mount the plugin folder into the container, typically done by adding a volume to the Docker run command.
+#### Configuration
+
+##### For Instance Grafana
+1. Open the Grafana configuration file (`grafana.ini`). This file is usually located in the Grafana installation directory.
+2. Add the following lines to your `grafana.ini` file:
+	  ```
+	allow_loading_unsigned_plugins = ick-buttontable-panel
+	```
+3. Save the `grafana.ini` file.
+
+##### For Grafana Docker Image
+If you are using Grafana via Docker, you need to configure the Docker run command to include the plugin.
+1. Locate your Docker run command or Docker Compose file.
+2. Add a volume to mount the plugin folder into the Grafana container.
+	Example Docker run command:
+	```bash
+	docker run -d -p 3000:3000 --name=grafana -v {/path/to/plugin/folder}:/var/lib/grafana/plugins/ick-buttontable-panel grafana/grafana:latest
+	```
+	
+	Replace `/path/to/plugin/folder` with the path to the plugin folder on your host machine.
+3. Add following lines to your docker_compose.yaml file:
+	```bash
+	environment:
+		NODE_ENV: development
+		GF_LOG_LEVEL: debug
+		GF_PLUGINS_ALLOW_LOADING_UNSIGNED_PLUGINS: ick-buttontable-panel
+	```
+5. Restart the Grafana Docker container.
+
+#### Restart Grafana
+After placing the plugin in the correct directory and configuring Grafana, restart Grafana to apply the changes.
+
+## Setup Development
 
 ### Frontend
-
 1. Install dependencies
-
-   ```bash
-   npm install
-   ```
-
+```bash
+npm install --legacy-peer-deps
+```
 2. Build plugin in development mode and run in watch mode
-
-   ```bash
-   npm run dev
-   ```
-
+```bash
+npm run dev
+```
 3. Build plugin in production mode
-
-   ```bash
-   npm run build
-   ```
-
+```bash
+npm run build
+```
 4. Run the tests (using Jest)
-
-   ```bash
-   # Runs the tests and watches for changes, requires git init first
-   npm run test
-
-   # Exits after running all the tests
-   npm run test:ci
-   ```
-
+```bash
+# Runs the tests and watches for changes, requires git init first
+npm run test
+# Exits after running all the tests
+npm run test:ci
+```
 5. Spin up a Grafana instance and run the plugin inside it (using Docker)
-
-   ```bash
-   npm run server
-   ```
-
-6. Run the E2E tests (using Cypress)
-
-   ```bash
-   # Spins up a Grafana instance first that we tests against
-   npm run server
-
-   # Starts the tests
-   npm run e2e
-   ```
-
-7. Run the linter
-
-   ```bash
-   npm run lint
-
-   # or
-
-   npm run lint:fix
-   ```
-
-# Distributing your plugin
-
-When distributing a Grafana plugin either within the community or privately the plugin must be signed so the Grafana application can verify its authenticity. This can be done with the `@grafana/sign-plugin` package.
-
-_Note: It's not necessary to sign a plugin during development. The docker development environment that is scaffolded with `@grafana/create-plugin` caters for running the plugin without a signature._
-
-## Initial steps
-
-Before signing a plugin please read the Grafana [plugin publishing and signing criteria](https://grafana.com/legal/plugins/#plugin-publishing-and-signing-criteria) documentation carefully.
-
-`@grafana/create-plugin` has added the necessary commands and workflows to make signing and distributing a plugin via the grafana plugins catalog as straightforward as possible.
-
-Before signing a plugin for the first time please consult the Grafana [plugin signature levels](https://grafana.com/legal/plugins/#what-are-the-different-classifications-of-plugins) documentation to understand the differences between the types of signature level.
-
-1. Create a [Grafana Cloud account](https://grafana.com/signup).
-2. Make sure that the first part of the plugin ID matches the slug of your Grafana Cloud account.
-   - _You can find the plugin ID in the `plugin.json` file inside your plugin directory. For example, if your account slug is `acmecorp`, you need to prefix the plugin ID with `acmecorp-`._
-3. Create a Grafana Cloud API key with the `PluginPublisher` role.
-4. Keep a record of this API key as it will be required for signing a plugin
-
-## Signing a plugin
-
-### Using Github actions release workflow
-
-If the plugin is using the github actions supplied with `@grafana/create-plugin` signing a plugin is included out of the box. The [release workflow](./.github/workflows/release.yml) can prepare everything to make submitting your plugin to Grafana as easy as possible. Before being able to sign the plugin however a secret needs adding to the Github repository.
-
-1. Please navigate to "settings > secrets > actions" within your repo to create secrets.
-2. Click "New repository secret"
-3. Name the secret "GRAFANA_API_KEY"
-4. Paste your Grafana Cloud API key in the Secret field
-5. Click "Add secret"
-
-#### Push a version tag
-
-To trigger the workflow we need to push a version tag to github. This can be achieved with the following steps:
-
-1. Run `npm version <major|minor|patch>`
-2. Run `git push origin main --follow-tags`
-
-## Learn more
-
-Below you can find source code for existing app plugins and other related documentation.
-
-- [Basic panel plugin example](https://github.com/grafana/grafana-plugin-examples/tree/master/examples/panel-basic#readme)
-- [`plugin.json` documentation](https://grafana.com/developers/plugin-tools/reference/plugin-json)
-- [How to sign a plugin?](https://grafana.com/developers/plugin-tools/publish-a-plugin/sign-a-plugin)
-git@github.com:IbrahimCanKALYA/grafana-button-table.git
+```bash
+npm run server
+```
+6. Run the linter
+```bash
+npm run lint
+# or
+npm run lint:fix
+```
