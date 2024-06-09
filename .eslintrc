@@ -1,0 +1,8 @@
+{
+  "extends": "./.config/.eslintrc",
+  "rules": {
+    "no-eval": "off",
+    "no-restricted-imports": "off",
+    "react-hooks/exhaustive-deps": "off"
+  }
+}
