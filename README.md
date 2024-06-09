@@ -15,7 +15,7 @@ The Grafana Table Extended Plugin is an extension of the base Grafana table plug
 ## Manual Installation Guide
 
  #### Download the Plugin
-	 Download the latest release of the Button Table Plugin from this [URL](https://).
+ Download the latest release of the Button Table Plugin from this [releases].(https://github.com/IbrahimCanKALYA/grafana-button-table/releases)..
  #### Place the Plugin in the Grafana Plugins Folder
 
  1. Extract the downloaded plugin zip file.
