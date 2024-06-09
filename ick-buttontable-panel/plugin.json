@@ -5,7 +5,7 @@
   "id": "ick-buttontable-panel",
   "info": {
     "keywords": ["panel"],
-    "description": "Extended grafana table",
+    "description": "Extended grafan table",
     "author": {
       "name": "Ick"
     },
@@ -15,8 +15,8 @@
     },
     "links": [],
     "screenshots": [],
-    "version": "%VERSION%",
-    "updated": "%TODAY%"
+    "version": "1.0.0",
+    "updated": "2024-06-09"
   },
   "dependencies": {
     "grafanaDependency": ">=10.3.3",
